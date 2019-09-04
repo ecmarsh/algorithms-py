@@ -39,19 +39,18 @@ class Solution:
         if n < 2:
             return 0
 
-        size = (n - 3) // 2 + 1
+        size = (n - 3) // 2 + 1  # -3 for 0,1,2 and // 2 to ignore evens
         primes = [2]
         is_prime = [True for i in range(size)]  # represents if (2i+3) is prime
 
         for i in range(size):
             if is_prime[i]:
-                p = i * 2 + 3
+                p = 2 * i + 3
                 primes.append(p)
-                # Sieve from p^2, where p^2 = (4i^2 + 12i + 9).
+                # Sieve from p^2, where p^2 = (2i+3)^2  = (4i^2 + 12i + 9)
                 # Index in is_prime is (2i^2 + 6i + 3)
                 # because is_prime[i] = 2i + 3.
-                # Note: Use long for `j` since p^2 may overflow.
                 for j in range(2 * i**2 + 6 * i + 3, size, p):
                     is_prime[j] = False
 
-        return len(primes)
+        return len(primes) - 1 if primes[-1] == n else len(primes)
