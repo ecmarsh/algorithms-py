@@ -22,6 +22,33 @@
 # 1 <= time[i] <= 500
 
 
+from collections import defaultdict
+
+
+class Solution:
+    def numPairsDivisibleBy60(self, times: List[int]) -> int:
+        """
+        Time: O(N), where N is len(T)
+        Space: O(1), max 60 in default dict
+        """
+        if len(times) < 2:
+            return 0
+
+        K = 60
+        pairs = 0
+        counts = defaultdict(int)
+
+        for t in times:
+            # Note: Python uses true mod operation so to handle
+            # case where 60 % 60 = 0, we can use `-` operator:
+            # Ex: (-40) % 60 = ((-40 % 60) + 60) % 60
+            #     = (-40 + 60) % 60 = 20 % 60 = 20
+            pairs += counts[-t % K]
+            counts[t % K] += 1
+
+        return pairs
+
+
 class BruteSolution:
     def numPairsDivisibleBy60(self, time: List[int]) -> int:
         """
