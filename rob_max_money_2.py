@@ -32,9 +32,9 @@ class Solution:
         https://github.com/ecmarsh/algorithms/blob/master/exercises/robMaxMoney.js
         Except now we are constrained on robbing house 1 based on house n.
         That is, we must break the circle by assuming a house isn't robbed.
-        To find out which one, we must try NOT robbing:
-            1) house[0] and house[-2], or
-            2) house[1] and house[-1]
+        To find out which one, we must try NOT robbing first 2 houses:
+            1) skip house[0], allowing us to rob house[-1], or
+            2) skip house[1], allowing us to rob house[-2]
         We can use the same solution in house robbers 1, but restrict our range
         The answer is, of course, is which 2 skips leads to the greater money.
         Let n = len(nums), then:
