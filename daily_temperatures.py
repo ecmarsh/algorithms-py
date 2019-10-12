@@ -39,3 +39,16 @@ class Solution:
                     days += ret[i+days] 
                 ret[i] = days
         return ret
+
+    def dailyTemperaturesAlt(self, T: List[int]) => List[int]:
+        """
+        Most common stack based solution. Still O(N) time but O(N) space.
+        """
+        n, stack = len(T), []
+        ret = [0] * n
+        for i, t in enumerate(T):
+            while stack and T[stack[-1]] < t:
+                j = stack.pop()
+                ret[j] = i - j
+            stack.append(i)
+        return ret
