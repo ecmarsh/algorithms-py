@@ -39,6 +39,9 @@ Space: O(n) output: O(2n) worst case if each interval split.
 """
 
 
+from typing import List
+
+
 class Solution:
     def removeInterval(self, intervals: List[List[int]], toBeRemoved: List[int]) -> List[List[int]]:
         beg, end = toBeRemoved
@@ -54,7 +57,7 @@ class Solution:
             elif a < beg and b <= end: 
                 res.append([a, beg])
             # upper portion of interval valid
-            elif a >= beg and a <= end and b > end: 
+            elif beg <= a <= end and b > end:
                 res.append([end, b])
             # toBeRemoved partitions the interval
             elif a < beg and b > end: 
