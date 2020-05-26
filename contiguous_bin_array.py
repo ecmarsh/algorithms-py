@@ -25,11 +25,14 @@ Time: O(n)
 Space: O(n) worst case if all ones or all zeros for dict
 """
 
+from typing import List
+
+
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
         max_len = 0
         ones_zeros_diff = 0
-        diff_first_seen_index = {ones_zeros_diff: -1}
+        diff_first_seen_index = dict(ones_zeros_diff=-1)
         for i, num in enumerate(nums):
             ones_zeros_diff += (num == 1) - (num == 0)  # 0->(-1), 1->(+1)
             diff_first_seen_index.setdefault(ones_zeros_diff, i)
